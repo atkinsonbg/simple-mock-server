@@ -1,0 +1,20 @@
+{
+    "description": "This is a test to make sure the routing works.",
+    "url": "/mockservertest/mock1",
+    "response": {
+        "statuscode": 200,
+        "status": "200 OK",
+        "headers": [
+            {
+                "accept": "application/json"
+            },
+            {
+                "custom": "headertype"
+            }
+        ],
+        "body": {
+            "property1": "value1",
+            "property2": "value2"
+        }
+    }
+}
