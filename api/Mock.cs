@@ -13,7 +13,15 @@ namespace api
     public interface IMocks
     {
         List<JsonDocument> GetCollection();
-        ContentResult GetResponse(string url);
+        MockResponse GetResponse(string url, string method);
+    }
+
+    public class MockResponse
+    {
+        public string Content { get; set; }
+        public int StatusCode { get; set; }
+
+        public JsonElement Headers { get; set; }
     }
 
     public class Mocks : IMocks
@@ -24,21 +32,8 @@ namespace api
         public Mocks(ILogger<Mocks> logger)
         {
             _logger = logger;
-
-            Collection = new List<JsonDocument>();
-
-            logger.LogInformation("Populating mock routes...");
-            string[] mocks = Directory.GetFiles("Mocks", "*.json");
-            Console.WriteLine("Number of mock files found: " + mocks.Count());
-            foreach(var mock in mocks)
-            {
-                using (StreamReader r = new StreamReader(mock))
-                {
-                    string json = r.ReadToEnd();
-                    this.Collection.Add(System.Text.Json.JsonDocument.Parse(json));
-                }
-            }
-            logger.LogInformation("Finished populating mock routes...");
+            this.Collection = new List<JsonDocument>();
+            this.BuildCollection();
         }
 
         public List<JsonDocument> GetCollection()
@@ -46,21 +41,58 @@ namespace api
             return this.Collection;
         }
 
-        public ContentResult GetResponse(string url)
+        private void BuildCollection()
         {
-            var response = new ContentResult();
-
-            var r = this.GetCollection().Where(x => x.RootElement.GetProperty("url").ToString() == url).FirstOrDefault();
-            if (r != null)
+            _logger.LogInformation("Populating mock routes...");
+            string[] mockFiles = Directory.GetFiles("Mocks", "*.json");
+            _logger.LogInformation("Number of mock files found: " + mockFiles.Count());
+            foreach(var mockFile in mockFiles)
             {
-                int status = 500;
-                response.Content = r.RootElement.GetProperty("response").GetProperty("body").ToString();
-                r.RootElement.GetProperty("response").GetProperty("statuscode").TryGetInt32(out status);
-                response.StatusCode = status;
-                response.ContentType = "application/json";
+                using (StreamReader file = new StreamReader(mockFile))
+                {
+                    string json = file.ReadToEnd();
+                    var allMocks = System.Text.Json.JsonDocument.Parse(json);
+
+                    foreach (JsonElement j in allMocks.RootElement.EnumerateArray())
+                    {
+                        this.Collection.Add(System.Text.Json.JsonDocument.Parse(j.ToString()));
+                    }
+                }
+            }
+            _logger.LogInformation("Finished populating mock routes...");
+            _logger.LogInformation("Number of mocks loaded: " + this.Collection.Count());
+        }
+
+        public MockResponse GetResponse(string url, string method)
+        {
+            var response = new MockResponse();
+
+            try
+            {
+                var r = this.GetCollection().Where(
+                    u => u.RootElement.GetProperty("url").ToString() == url &&
+                        u.RootElement.GetProperty("method").ToString() == method).FirstOrDefault();
+                if (r != null)
+                {
+                    response.Content = r.RootElement.GetProperty("response").GetProperty("body").ToString();
+                    response.Headers = r.RootElement.GetProperty("response").GetProperty("headers");
+
+                    int status = 200;
+                    r.RootElement.GetProperty("response").GetProperty("statuscode").TryGetInt32(out status);
+                    response.StatusCode = status;
+
+                    return response;
+                }
+            } 
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message, null);
+
+                response.StatusCode = 599;
+                response.Content = "Route not matched and an error occurred.";
                 return response;
             }
-            
+
             response.StatusCode = 400;
             response.Content = "Route not matched in mocks loaded.";
             return response;

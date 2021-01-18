@@ -1,20 +1,71 @@
-{
-    "description": "This is a test to make sure the routing works.",
-    "url": "/mockservertest/mock1",
-    "response": {
-        "statuscode": 200,
-        "status": "200 OK",
-        "headers": [
-            {
-                "accept": "application/json"
-            },
-            {
-                "custom": "headertype"
+[
+    {
+        "description": "This is a test to make sure the routing works.",
+        "url": "/mockservertest/mock1",
+        "method": "GET",
+        "response": {
+            "statuscode": 200,
+            "headers": [
+                {
+                    "accept": "application/json"
+                },
+                {
+                    "custom": "headertype"
+                },
+                {
+                    "content-type": "application/json"
+                }
+            ],
+            "body": {
+                "method": "GET",
+                "property2": "value2"
             }
-        ],
-        "body": {
-            "property1": "value1",
-            "property2": "value2"
+        }
+    },
+    {
+        "description": "This is a test to make sure the routing works.",
+        "url": "/mockservertest/mock1",
+        "method": "POST",
+        "response": {
+            "statuscode": 200,
+            "headers": [
+                {
+                    "accept": "application/json"
+                },
+                {
+                    "custom": "headertype"
+                },
+                {
+                    "content-type": "application/json"
+                }
+            ],
+            "body": {
+                "method": "POST",
+                "property2": "value2"
+            }
+        }
+    },
+    {
+        "description": "This is a test to make sure the routing works.",
+        "url": "/mockservertest/mock2",
+        "method": "GET",
+        "response": {
+            "statuscode": 200,
+            "headers": [
+                {
+                    "accept": "application/json"
+                },
+                {
+                    "custom": "headertype"
+                },
+                {
+                    "content-type": "application/json"
+                }
+            ],
+            "body": {
+                "property1": "value3",
+                "property2": "value4"
+            }
         }
     }
-}
+]
