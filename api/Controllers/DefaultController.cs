@@ -40,10 +40,9 @@ namespace api.Controllers
 
             var r = _mocks.GetResponse(Request.Path + Request.QueryString.ToString(), Request.Method);
             
-            foreach (var header in r.Headers.EnumerateArray())
+            foreach (var h in r.Headers)
             {
-                var h = header.EnumerateObject();
-                Response.Headers.Add(h.FirstOrDefault().Name, h.FirstOrDefault().Value.ToString());
+                Response.Headers.Add(h.Key, h.Value);
             }
 
             var response = new ContentResult();

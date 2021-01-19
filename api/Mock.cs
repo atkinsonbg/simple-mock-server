@@ -10,20 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace api
 {
-    public interface IMocks
-    {
-        List<JsonDocument> GetCollection();
-        MockResponse GetResponse(string url, string method);
-    }
-
-    public class MockResponse
-    {
-        public string Content { get; set; }
-        public int StatusCode { get; set; }
-
-        public JsonElement Headers { get; set; }
-    }
-
     public class Mocks : IMocks
     {
         private readonly ILogger<Mocks> _logger;
@@ -66,6 +52,7 @@ namespace api
         public MockResponse GetResponse(string url, string method)
         {
             var response = new MockResponse();
+            response.Headers = new Dictionary<string, string>();
 
             try
             {
@@ -75,7 +62,13 @@ namespace api
                 if (r != null)
                 {
                     response.Content = r.RootElement.GetProperty("response").GetProperty("body").ToString();
-                    response.Headers = r.RootElement.GetProperty("response").GetProperty("headers");
+
+                    var headers = r.RootElement.GetProperty("response").GetProperty("headers");
+                    foreach (var header in headers.EnumerateArray())
+                    {
+                        var h = header.EnumerateObject();
+                        response.Headers.Add(h.FirstOrDefault().Name, h.FirstOrDefault().Value.ToString());
+                    }
 
                     int status = 200;
                     r.RootElement.GetProperty("response").GetProperty("statuscode").TryGetInt32(out status);
