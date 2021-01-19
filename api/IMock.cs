@@ -6,6 +6,6 @@ namespace api
 public interface IMocks
     {
         List<JsonDocument> GetCollection();
-        MockResponse GetResponse(string url, string method);
+        MockResponse GetResponse(string url, string method, string requestBody);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -31,14 +32,15 @@ namespace api.Controllers
         [HttpPost]
         [HttpPut]
         [Route("/{*.}")]
-        public ActionResult Handle()
+        public async Task<ActionResult> HandleAsync()
         {
-            _logger.LogInformation(Request.Method);
-            _logger.LogInformation(Request.Path);
-            _logger.LogInformation(Request.Path + Request.QueryString.ToString());
-            _logger.LogInformation(Request.QueryString.ToString());
+            string requestBody;
+            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                requestBody = await reader.ReadToEndAsync();
+            }
 
-            var r = _mocks.GetResponse(Request.Path + Request.QueryString.ToString(), Request.Method);
+            var r = _mocks.GetResponse(Request.Path + Request.QueryString.ToString(), Request.Method, requestBody);
             
             foreach (var h in r.Headers)
             {
