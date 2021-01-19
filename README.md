@@ -68,10 +68,12 @@ The goal of this project is to provide a simple mock server for mocking external
             ],
             "body": {
                 "method": "GET",
-                "route": "mock1"
+                "route": "mock2"
             }
         }
     }
 ]
 ```
-fds
+This file would be saved with any name you like, but must have a `.json` file extension, for instance: `./Mocks/mocksertest.json`. When the container starts it simply looks for any `.json` files in its `Mocks` folder and loads them into memory.
+
+
