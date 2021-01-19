@@ -1,6 +1,6 @@
 [
     {
-        "description": "This is a test to make sure the routing works.",
+        "description": "Internal mock-server test to make sure the routing works.",
         "url": "/mockservertest/mock1",
         "method": "GET",
         "response": {
@@ -18,12 +18,12 @@
             ],
             "body": {
                 "method": "GET",
-                "property2": "value2"
+                "route": "mock2"
             }
         }
     },
     {
-        "description": "This is a test to make sure the routing works.",
+        "description": "Internal mock-server a test to make sure the routing works.",
         "url": "/mockservertest/mock1",
         "method": "POST",
         "response": {
@@ -41,7 +41,7 @@
             ],
             "body": {
                 "method": "POST",
-                "property2": "value2"
+                "route": "mock1"
             }
         }
     },

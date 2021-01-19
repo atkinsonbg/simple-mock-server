@@ -1,7 +1,8 @@
 [
     {
-        "description": "This is a test to make sure the routing works.",
+        "description": "Internal mock-server test to make sure the routing works.",
         "url": "/mockservertest/mock3",
+        "method": "PUT",
         "response": {
             "statuscode": 200,
             "headers": [
@@ -16,8 +17,8 @@
                 }
             ],
             "body": {
-                "property1": "value5",
-                "property2": "value6"
+                "method": "PUT",
+                "route": "mock3"
             }
         }
     }
