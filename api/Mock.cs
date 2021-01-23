@@ -53,7 +53,6 @@ namespace api
         public MockResponse GetResponse(string url, string method, string requestBody, string requestHeaders)
         {
             this.Mock = null;
-
             var response = new MockResponse();
             response.Headers = new Dictionary<string, string>();
 
@@ -67,12 +66,11 @@ namespace api
                 // If more than one Mock is found, match against REQUEST BODY and then HEADERS
                 if (query != null && query.Count() > 1)
                 {
-                    var subQuery = this.MatchRequestBody(query, requestBody);
-                    if (subQuery.Count() > 1)
+                    var subQuery = this.MatchRequestElements(query, requestBody, "body");
+                    if (subQuery != null && subQuery.Count() > 1)
                     {
-                        //this.Mock = query.FirstOrDefault();
-                        subQuery = this.MatchHeaders(subQuery, requestHeaders);
-                        if (subQuery.Count() > 1)
+                        subQuery = this.MatchRequestElements(subQuery, requestHeaders, "headers");
+                        if (subQuery != null && subQuery.Count() > 1)
                         {
                             response.StatusCode = 400;
                             response.Content = "Route matched more than one mocks loaded.";
@@ -125,31 +123,13 @@ namespace api
             return response;
         }
 
-        private IEnumerable<JsonDocument> MatchRequestBody(IEnumerable<JsonDocument> query, string json)
+        private IEnumerable<JsonDocument> MatchRequestElements(IEnumerable<JsonDocument> query, string json, string element)
         {
             var returnElements = new List<JsonDocument>();
             var comparer = new JsonElementComparer();
             foreach (var mock in query)
             {
-                var jsonToTest = JsonDocument.Parse(mock.RootElement.GetProperty("request").GetProperty("body").ToString());
-                var incomingJson = JsonDocument.Parse(json);
-                if (comparer.Equals(jsonToTest.RootElement, incomingJson.RootElement))
-                {
-                    returnElements.Add(mock);
-                }
-            }
-            
-            return returnElements.AsEnumerable();
-        }
-
-        private IEnumerable<JsonDocument> MatchHeaders(IEnumerable<JsonDocument> query, string json)
-        {
-            Console.WriteLine("MATHCING HEADRES");
-            var returnElements = new List<JsonDocument>();
-            var comparer = new JsonElementComparer();
-            foreach (var mock in query)
-            {
-                var jsonToTest = JsonDocument.Parse(mock.RootElement.GetProperty("request").GetProperty("headers").ToString());
+                var jsonToTest = JsonDocument.Parse(mock.RootElement.GetProperty("request").GetProperty(element).ToString());
                 var incomingJson = JsonDocument.Parse(json);
                 if (comparer.Equals(jsonToTest.RootElement, incomingJson.RootElement))
                 {
