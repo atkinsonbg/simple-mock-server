@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # Mock-Server
 The goal of this project is to provide a simple mock server for mocking external API calls. Mock-Server runs as a standalone Docker container, which you can call via your code in order to mock API calls. When you run the container you mount a folder, "Mocks", from your local environment to the container. When the container starts, it loads all these mocks into memory and will return the appropriate data for your call. 
 
