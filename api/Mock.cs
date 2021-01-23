@@ -114,11 +114,11 @@ namespace api
                 _logger.LogError(ex, ex.Message, null);
 
                 response.StatusCode = 599;
-                response.Content = "Route not matched and an error occurred.";
+                response.Content = "Route not matched, an error occurred.";
                 return response;
             }
 
-            response.StatusCode = 400;
+            response.StatusCode = 499;
             response.Content = "Route not matched in mocks loaded.";
             return response;
         }

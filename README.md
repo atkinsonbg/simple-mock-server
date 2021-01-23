@@ -93,4 +93,22 @@ As noted above, the structure of each JSON file is an array of mocks you want to
 
 This gives you flexibility in how you organize and store your mocks. The only requirement is they are all mounted to the `/api/Mocks` directory in the container.
 
+## How Matching Works
+When a request is sent to the mock container it is evaluated in the following order:
+1. Match against the URL and METHOD.
+2. If more than one result is found, match against the REQUEST BODY.
+3. If more than one result is found, match against the REQUEST HEADERS.
+4. If more than one result is found at this point, return an error.
 
+## Error Responses
+The following error responses may be returned from the container. They will always throw a X99 code in order not to conflict with any 4XX or 5XX responses you wish to legimately test for in your code. Server errors are logged and are most often the result of malformed JSON in the mock file.
+
+### Route Not Matched
+In the event the server cannot match a request against any mocks it has loaded you will get the following response:
+- StatusCode: 499
+- Message: Route not matched in mocks loaded.
+
+### Server Error
+In the event the server throws an error, you will get the following response:
+- StatusCode: 599
+- Message: Route not matched, an error occurred.
