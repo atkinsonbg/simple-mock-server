@@ -2,10 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace api
@@ -105,7 +102,6 @@ namespace api
                     int status = 200;
                     this.Mock.RootElement.GetProperty("response").GetProperty("statuscode").TryGetInt32(out status);
                     response.StatusCode = status;
-
                     return response;
                 }
             } 
