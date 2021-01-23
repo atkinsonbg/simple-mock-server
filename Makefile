@@ -10,3 +10,6 @@ docker:	publish
 
 dockerrun:
 	docker run -p 80:5000 atkinsonbg/mock-server:latest
+
+retag:
+	docker tag atkinsonbg/mock-server:latest atkinsonbg/mock-server:0.1
