@@ -1,4 +1,4 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+![GitHub](https://img.shields.io/github/license/atkinsonbg/mock-server) 
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/atkinsonbg/mock-server)
 
 # Mock-Server
