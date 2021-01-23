@@ -3,16 +3,32 @@ The goal of this project is to provide a simple mock server for mocking external
 
 This is meant to be simple at its core. There are no fancy bells and whistles here: no recording and storing of requests/responses, no sharing of mocks across multiple repos, etc. Just mount of folder of mocks you care about and run it. It was designed so you could pull the Docker image and start testing, without the need for a lot of setup.
 
+## Docker Image
 A pre-built Docker image can be located here: https://hub.docker.com/repository/docker/atkinsonbg/mock-server
 
-A mock file looks like the following:
 
+## How It Works
+When you start the Mock Server container, it reads all the JSON files it can find in a root level directory located at `/api/Mocks`. It loads these into memory and uses them to respond to any requests the container receives. 
+
+A mock file looks like the following, and must be an array of JSON regardless of how many mocks you have in the file:
 ```
 [
     {
         "description": "Internal mock-server test to make sure the routing works.",
         "url": "/mockservertest/mock1",
         "method": "GET",
+        "request": {
+            "body": {
+                "obj1": "value1",
+                "obj2": "value2"
+            },
+            "headers": {
+                "Host": "localhost:5000",
+                "Referer": "http://localhost:5000/mockservertest/mock5",
+                "Content-Length": "48",
+                "custom2": "hello"
+            }
+        },
         "response": {
             "statuscode": 200,
             "headers": [
@@ -36,6 +52,18 @@ A mock file looks like the following:
         "description": "Internal mock-server a test to make sure the routing works.",
         "url": "/mockservertest/mock1",
         "method": "POST",
+        "request": {
+            "body": {
+                "field1": "Hello",
+                "field2": "World"
+            },
+            "headers": {
+                "Host": "localhost:5000",
+                "Referer": "http://localhost:5000/mockservertest/mock5",
+                "Content-Length": "48",
+                "custom1": "hello"
+            }
+        },
         "response": {
             "statuscode": 200,
             "headers": [
@@ -54,32 +82,15 @@ A mock file looks like the following:
                 "route": "mock1"
             }
         }
-    },
-    {
-        "description": "This is a test to make sure the routing works.",
-        "url": "/mockservertest/mock2",
-        "method": "GET",
-        "response": {
-            "statuscode": 200,
-            "headers": [
-                {
-                    "accept": "application/json"
-                },
-                {
-                    "custom": "headertype"
-                },
-                {
-                    "content-type": "application/json"
-                }
-            ],
-            "body": {
-                "method": "GET",
-                "route": "mock2"
-            }
-        }
     }
 ]
 ```
-This file would be saved with any name you like, but must have a `.json` file extension, for instance: `./Mocks/mocksertest.json`. When the container starts it simply looks for any `.json` files in its `Mocks` folder and loads them into memory.
+
+As noted above, the structure of each JSON file is an array of mocks you want to load. This gives you a lot of flexibility in organzing your mocks. For instance, you could have any combination of the following:
+- A single JSON file, with only one mock in each file
+- A single JSON file, with multiple mocks in each file
+- Subdirectorys with JSON files in them
+
+This gives you flexibility in how you organize and store your mocks. The only requirement is they are all mounted to the `/api/Mocks` directory in the container.
 
 
