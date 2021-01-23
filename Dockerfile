@@ -3,4 +3,5 @@ WORKDIR /api
 COPY ./api/deploy/api api
 COPY ./api/Mocks Mocks
 ENV ASPNETCORE_URLS=http://+:5000
+EXPOSE 5000
 CMD ["./api"]

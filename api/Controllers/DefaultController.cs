@@ -40,7 +40,10 @@ namespace api.Controllers
                 requestBody = await reader.ReadToEndAsync();
             }
 
-            var r = _mocks.GetResponse(Request.Path + Request.QueryString.ToString(), Request.Method, requestBody);
+            var d = Request.Headers.ToDictionary(k=>k.Key, v=>v.Value.FirstOrDefault());
+            var requestHeaders = JsonSerializer.Serialize(d);
+
+            var r = _mocks.GetResponse(Request.Path + Request.QueryString.ToString(), Request.Method, requestBody, requestHeaders);
             
             foreach (var h in r.Headers)
             {

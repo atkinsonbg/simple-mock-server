@@ -4,8 +4,10 @@
         "url": "/mockservertest/mock4",
         "method": "POST",
         "request": {
-            "field1": "Hello",
-            "field2": "World"
+            "body": {
+                "field1": "Hello",
+                "field2": "World"
+            }
         },
         "response": {
             "statuscode": 200,
@@ -32,9 +34,11 @@
         "url": "/mockservertest/mock4",
         "method": "POST",
         "request": {
-            "field1": "Hello",
-            "field2": {
-                "field3": "World"
+            "body": {
+                "field1": "Hello",
+                "field2": {
+                    "field3": "World"
+                }
             }
         },
         "response": {

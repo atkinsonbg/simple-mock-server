@@ -1,0 +1,74 @@
+[
+    {
+        "description": "Internal mock-server test to make sure the routing works.",
+        "url": "/mockservertest/mock5",
+        "method": "GET",
+        "request": {
+            "body": {
+                "field1": "Hello",
+                "field2": "World"
+            },
+            "headers": {
+                "Host": "localhost:5001",
+                "Referer": "http://localhost:5000/mockservertest/mock5",
+                "Content-Length": "48",
+                "custom1": "hello"
+            }
+        },
+        "response": {
+            "statuscode": 200,
+            "headers": [
+                {
+                    "accept": "application/json"
+                },
+                {
+                    "custom": "headertype"
+                },
+                {
+                    "content-type": "application/json"
+                }
+            ],
+            "body": {
+                "method": "POST",
+                "route": "mock3",
+                "body-level": "one-layer"
+            }
+        }
+    },
+    {
+        "description": "Internal mock-server test to make sure the routing works.",
+        "url": "/mockservertest/mock5",
+        "method": "GET",
+        "request": {
+            "body": {
+                "field1": "Hello",
+                "field2": "World"
+            },
+            "headers": {
+                "Host": "localhost:5001",
+                "Referer": "http://localhost:5000/mockservertest/mock5",
+                "Content-Length": "48",
+                "custom2": "hello"
+            }
+        },
+        "response": {
+            "statuscode": 200,
+            "headers": [
+                {
+                    "accept": "application/json"
+                },
+                {
+                    "custom": "headertype"
+                },
+                {
+                    "content-type": "application/json"
+                }
+            ],
+            "body": {
+                "method": "GET",
+                "route": "mock5",
+                "body-level": "one-layer"
+            }
+        }
+    }
+]
