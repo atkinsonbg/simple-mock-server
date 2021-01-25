@@ -3,9 +3,13 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O5O63ENS7)
 
 # Mock-Server
-The goal of this project is to provide a simple mock server for mocking external API calls. Mock-Server runs as a standalone Docker container, which you can call via your code in order to mock API calls. When you run the container you mount a folder, "Mocks", from your local environment to the container. When the container starts, it loads all these mocks into memory and will return the appropriate data for your call. 
+The goal of this project is to provide a simple mock server for mocking external API calls. The mock server runs as a standalone Docker container, which you can call via your code in order to mock API calls. When you run the container you mount a folder, "Mocks", from your local environment to the container. When the container starts, it loads all these mocks into memory and will return the appropriate data for your call. 
 
 This is meant to be simple at its core. There are no fancy bells and whistles here: no recording and storing of requests/responses, no sharing of mocks across multiple repos, etc. Just mount of folder of mocks you care about and run it. It was designed so you could pull the Docker image and start testing, without the need for a lot of setup.
+
+Simplicity and "getting up and running fast" is at the core of this project. It does not ship with many bells and whistles and that is by design. If you want or need things like: proxies, record/replay, UI, etc, check out some of these other offerings:
+- Wire Mock: http://wiremock.org/
+- MockServer: https://www.mock-server.com/
 
 ## Docker Image
 A pre-built Docker image can be located here: https://hub.docker.com/repository/docker/atkinsonbg/mock-server
