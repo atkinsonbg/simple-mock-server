@@ -92,11 +92,11 @@ namespace api
                 {
                     response.Content = this.Mock.RootElement.GetProperty("response").GetProperty("body").ToString();
 
-                    var headers = this.Mock.RootElement.GetProperty("response").GetProperty("headers");
-                    foreach (var header in headers.EnumerateArray())
+                    var headers = this.Mock.RootElement.GetProperty("response").GetProperty("headers").EnumerateObject();
+                    foreach (var header in headers)
                     {
-                        var h = header.EnumerateObject();
-                        response.Headers.Add(h.FirstOrDefault().Name, h.FirstOrDefault().Value.ToString());
+                        var h = header;
+                        response.Headers.Add(h.Name, h.Value.ToString());
                     }
 
                     int status = 200;

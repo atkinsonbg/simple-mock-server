@@ -5,17 +5,11 @@
         "method": "GET",
         "response": {
             "statuscode": 200,
-            "headers": [
-                {
-                    "accept": "application/json"
-                },
-                {
-                    "custom": "headertype"
-                },
-                {
-                    "content-type": "application/json"
-                }
-            ],
+            "headers": {
+                "accept": "application/json",
+                "custom": "headertype",
+                "content-type": "application/json"
+            },
             "body": {
                 "method": "GET",
                 "route": "mock2"
@@ -28,17 +22,11 @@
         "method": "POST",
         "response": {
             "statuscode": 200,
-            "headers": [
-                {
-                    "accept": "application/json"
-                },
-                {
-                    "custom": "headertype"
-                },
-                {
-                    "content-type": "application/json"
-                }
-            ],
+            "headers": {
+                "accept": "application/json",
+                "custom": "headertype",
+                "content-type": "application/json"
+            },
             "body": {
                 "method": "POST",
                 "route": "mock1"
@@ -51,17 +39,11 @@
         "method": "GET",
         "response": {
             "statuscode": 200,
-            "headers": [
-                {
-                    "accept": "application/json"
-                },
-                {
-                    "custom": "headertype"
-                },
-                {
-                    "content-type": "application/json"
-                }
-            ],
+            "headers": {
+                "accept": "application/json",
+                "custom": "headertype",
+                "content-type": "application/json"
+            },
             "body": {
                 "method": "GET",
                 "route": "mock1"

@@ -17,17 +17,11 @@
         },
         "response": {
             "statuscode": 200,
-            "headers": [
-                {
-                    "accept": "application/json"
-                },
-                {
-                    "custom": "headertype"
-                },
-                {
-                    "content-type": "application/json"
-                }
-            ],
+            "headers": {
+                "accept": "application/json",
+                "custom": "headertype",
+                "content-type": "application/json"
+            },
             "body": {
                 "method": "POST",
                 "route": "mock3",
@@ -53,17 +47,11 @@
         },
         "response": {
             "statuscode": 200,
-            "headers": [
-                {
-                    "accept": "application/json"
-                },
-                {
-                    "custom": "headertype"
-                },
-                {
-                    "content-type": "application/json"
-                }
-            ],
+            "headers": {
+                "accept": "application/json",
+                "custom": "headertype",
+                "content-type": "application/json"
+            },
             "body": {
                 "method": "GET",
                 "route": "mock5",
