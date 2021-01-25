@@ -60,5 +60,20 @@ namespace test
             var m = _mocks.GetResponse("/mockservertest/mock999999999", "GET", null, null);
             Assert.True(m.StatusCode == 499);
         }
+
+        [Fact]
+        public void TestMockFoundByRouteRequestContent()
+        {
+            var m = _mocks.GetResponse("/mockservertest/mock4", "POST", "{\"field1\": \"Hello\",\"field2\":\"World\"}", null);
+            var json = m.Content.Replace(" ","").Replace("\n", "");
+            Assert.True(json == "{\"method\":\"POST\",\"route\":\"mock3\",\"body-level\":\"one-layer\"}");
+        }
+
+        [Fact]
+        public void TestMockFoundByRouteRequestBadContent()
+        {
+            var m = _mocks.GetResponse("/mockservertest/mock4", "POST", "{\"field1\": \"Hello\",\"field2\":\"World\"", null);
+            Assert.True(m.StatusCode == 599);
+        }
     }
 }
