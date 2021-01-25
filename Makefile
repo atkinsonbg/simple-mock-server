@@ -9,7 +9,10 @@ docker:	publish
 	docker build -t atkinsonbg/mock-server:latest .
 
 dockerrun:
-	docker run -p 80:5000 atkinsonbg/mock-server:latest
+	docker run -p 5000:5000 atkinsonbg/mock-server:latest
 
 retag:
 	docker tag atkinsonbg/mock-server:latest atkinsonbg/mock-server:0.1
+
+push:
+	docker push atkinsonbg/mock-server:0.1
