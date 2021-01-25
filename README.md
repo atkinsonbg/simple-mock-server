@@ -35,17 +35,11 @@ A mock file looks like the following, and must be an array of JSON regardless of
         },
         "response": {
             "statuscode": 200,
-            "headers": [
-                {
-                    "accept": "application/json"
-                },
-                {
-                    "custom": "headertype"
-                },
-                {
-                    "content-type": "application/json"
-                }
-            ],
+            "headers": {
+                "accept": "application/json",
+                "custom": "headertype",
+                "content-type": "application/json"
+            },
             "body": {
                 "method": "GET",
                 "route": "mock2"
@@ -70,17 +64,11 @@ A mock file looks like the following, and must be an array of JSON regardless of
         },
         "response": {
             "statuscode": 200,
-            "headers": [
-                {
-                    "accept": "application/json"
-                },
-                {
-                    "custom": "headertype"
-                },
-                {
-                    "content-type": "application/json"
-                }
-            ],
+            "headers": {
+                "accept": "application/json",
+                "custom": "headertype",
+                "content-type": "application/json"
+            },
             "body": {
                 "method": "POST",
                 "route": "mock1"
