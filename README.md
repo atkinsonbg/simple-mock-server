@@ -22,7 +22,7 @@ A mock file looks like the following, and must be an array of JSON regardless of
 ```
 [
     {
-        "description": "Internal mock-server test to make sure the routing works.",
+        "description": "Internal mock server test to make sure the routing works.",
         "url": "/mockservertest/mock1",
         "method": "GET",
         "request": {
@@ -51,7 +51,7 @@ A mock file looks like the following, and must be an array of JSON regardless of
         }
     },
     {
-        "description": "Internal mock-server a test to make sure the routing works.",
+        "description": "Internal mock server a test to make sure the routing works.",
         "url": "/mockservertest/mock1",
         "method": "POST",
         "request": {
@@ -113,10 +113,10 @@ In the event the server throws an error, you will get the following response:
 You can run the container with the following command:
 `docker run -v "$(pwd)"/Mocks:/api/Mocks -p 5000:5000 atkinsonbg/mock-server:0.1`
 
-Mock-Server is setup to listen on port 5000, so you will need to map to that port number. As you can see in this example, I have mounted a local `Mocks` directory to the `/api/Mocks` directory in the container.
+The mock server is setup to listen on port 5000, so you will need to map to that port number. As you can see in this example, I have mounted a local `Mocks` directory to the `/api/Mocks` directory in the container.
 
 ## Viewing The Mocks The Container Has Loaded
-Mock-Server has an endpoint setup to display all the mocks it has currently loaded in memory:
+The mock server has an endpoint setup to display all the mocks it has currently loaded in memory:
 `http://localhost:5000/mockserverconfig`
 
 This is a helpful endpoint to hit, as it will let you know if your mocks were loaded successfully. It should always return a list of mocks, as the container ships with test mock files by default. However, once you mount your directory to the `/api/Mocks` directory, the pre-shipped mocks are overwritten with yours and will no longer be present.
