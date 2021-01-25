@@ -2,7 +2,7 @@
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/atkinsonbg/mock-server) 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O5O63ENS7)
 
-# Mock-Server
+# Simple Mock Server
 The goal of this project is to provide a simple mock server for mocking external API calls. The mock server runs as a standalone Docker container, which you can call via your code in order to mock API calls. When you run the container you mount a folder, "Mocks", from your local environment to the container. When the container starts, it loads all these mocks into memory and will return the appropriate data for your call. 
 
 This is meant to be simple at its core. There are no fancy bells and whistles here: no recording and storing of requests/responses, no sharing of mocks across multiple repos, etc. Just mount of folder of mocks you care about and run it. It was designed so you could pull the Docker image and start testing, without the need for a lot of setup.
