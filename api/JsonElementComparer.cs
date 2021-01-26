@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Json;
 
@@ -9,6 +10,7 @@ namespace api
     // Many kudos to DBC (https://stackoverflow.com/users/3744182/dbc), as I did not want to write this code!
     // All thanks belong to DBC!!
 
+    [ExcludeFromCodeCoverage]
     public class JsonElementComparer : IEqualityComparer<JsonElement>
     {
         public JsonElementComparer() : this(-1) { }
