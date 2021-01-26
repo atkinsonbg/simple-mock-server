@@ -64,9 +64,21 @@ namespace test
         [Fact]
         public void TestMockFoundByRouteRequestContent()
         {
-            var m = _mocks.GetResponse("/mockservertest/mock4", "POST", "{\"field1\": \"Hello\",\"field2\":\"World\"}", null);
+            var requestBody = "{\"field1\":\"Hello\",\"field2\":{\"field3\":\"World\"}}";
+            var requestHeaders = "{}";
+            var m = _mocks.GetResponse("/mockservertest/mock4", "POST", requestBody, requestHeaders);
             var json = m.Content.Replace(" ","").Replace("\n", "");
-            Assert.True(json == "{\"method\":\"POST\",\"route\":\"mock3\",\"body-level\":\"one-layer\"}");
+            Assert.True(json == "{\"method\":\"POST\",\"route\":\"mock3\",\"body-level\":\"two-layer\"}");
+        }
+
+        [Fact]
+        public void TestMockFoundByRouteRequestHeadersContent()
+        {
+            var requestBody = "{\"field1\":\"Hello\",\"field2\":\"World\"}";
+            var requestHeaders = "{\"accept\":\"application/json\",\"custom\":\"headertype2\",\"content-type\":\"application/json\"}";
+            var m = _mocks.GetResponse("/mockservertest/mock4", "POST", requestBody, requestHeaders);
+            var json = m.Content.Replace(" ","").Replace("\n", "");
+            Assert.True(json == "{\"method\":\"POST\",\"route\":\"mock4-2\",\"body-level\":\"one-layer\"}");
         }
 
         [Fact]
