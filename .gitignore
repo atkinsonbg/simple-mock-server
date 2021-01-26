@@ -561,3 +561,4 @@ deploy
 deploy/*
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,visualstudio,visualstudiocode,dotnetcore,aspnetcore
+lcov.info

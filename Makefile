@@ -18,7 +18,7 @@ push:
 	docker push atkinsonbg/mock-server:0.1
 
 tests:
-	dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov ./test/test.csproj
+	dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../lcov ./test/test.csproj
 
 coverage:
 	coverlet ./test/bin/Debug/netcoreapp3.1/test.dll --target "dotnet" --targetargs "test ./test/test.csproj --no-build"
