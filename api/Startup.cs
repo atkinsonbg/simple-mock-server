@@ -10,6 +10,7 @@ namespace api
     [ExcludeFromCodeCoverage]
     public class Startup
     {
+        readonly string LocalhostOrigin = "_LocalhostOrigin";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -20,6 +21,14 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: LocalhostOrigin,
+                builder =>
+                {
+                    builder.WithOrigins().AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+                });
+            });
             services.AddControllers();
             services.AddSingleton<IMocks, Mocks>();
         }
@@ -31,6 +40,8 @@ namespace api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(LocalhostOrigin);
 
             app.UseHttpsRedirection();
 
