@@ -12,7 +12,7 @@ Simplicity and "getting up and running fast" is at the core of this project. It 
 - MockServer: https://www.mock-server.com/
 
 ## Docker Image
-A pre-built Docker image can be located here: https://hub.docker.com/repository/docker/atkinsonbg/mock-server
+A pre-built Docker image can be located here: https://hub.docker.com/r/atkinsonbg/mock-server
 
 ## How It Works
 When you start the Mock Server container, it reads all the JSON files it can find in a root level directory located at `/api/Mocks`. It loads these into memory and uses them to respond to any requests the container receives. 
